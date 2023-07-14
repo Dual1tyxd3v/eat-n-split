@@ -21,7 +21,7 @@ export default function SplitBill({
   function onChangeHandler(e: ChangeEvent) {
     const input = e.target as HTMLInputElement;
     input.name === 'bill' && +input.value >= 0 && setBill(+input.value);
-    input.name === 'expanse' && +input.value >= 0 && setExpanse(+input.value);
+    input.name === 'expanse' && +input.value >= 0 && setExpanse(bill && bill >= +input.value ? +input.value : 0);
     input.name === 'select' && setWhoPay(input.value);
   }
 
@@ -63,7 +63,7 @@ export default function SplitBill({
       <input
         type="number"
         disabled
-        value={bill && expanse ? bill - expanse : 0}
+        value={bill && expanse && bill ? bill - expanse : 0}
       />
       <label htmlFor="select">🤑 Who is paying the bill</label>
       <select
