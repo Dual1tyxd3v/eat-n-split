@@ -31,6 +31,7 @@ function App(): JSX.Element {
         <FriendList
           friends={friends}
           toggleActiveFriend={onToggleActiveFriend}
+          activeId={activeFriend?.id}
         />
         <AddFriend addFriend={onAddFriends} />
       </div>

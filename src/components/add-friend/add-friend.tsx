@@ -55,7 +55,7 @@ export default function AddFriend({ addFriend }: AddFriendProps) {
         </form>
       )}
       <button className="button" onClick={() => setIsOpen(!isOpen)}>
-        Add friend
+        {isOpen ? 'Close' : 'Add friend'}
       </button>
     </>
   );
