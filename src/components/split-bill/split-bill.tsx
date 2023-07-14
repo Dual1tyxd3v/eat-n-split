@@ -1,20 +1,19 @@
 import { ChangeEvent, useState, FormEvent } from 'react';
-import { FriendType } from '../../types/types';
 
 type SplitBillProps = {
-  activeFriend: null | FriendType;
-  onEditFriendBalance: (friend: FriendType) => void;
+  name: undefined | string;
+  onEditFriendBalance: (newBalance: number) => void;
 };
 
 export default function SplitBill({
-  activeFriend,
+  name,
   onEditFriendBalance,
 }: SplitBillProps) {
   const [bill, setBill] = useState<undefined | number>();
   const [expanse, setExpanse] = useState<undefined | number>();
   const [whoPay, setWhoPay] = useState('user');
 
-  if (!activeFriend) {
+  if (!name) {
     return null;
   }
 
@@ -31,17 +30,13 @@ export default function SplitBill({
     if (!bill || !expanse) {
       return;
     }
-    activeFriend &&
-      onEditFriendBalance({
-        ...activeFriend,
-        balance: whoPay === 'user' ? bill - expanse : -expanse,
-      });
+    name &&
+      onEditFriendBalance(whoPay === 'user' ? bill - expanse : -expanse);
     setBill(0);
     setExpanse(0);
     setWhoPay('user');
   }
 
-  const { name } = activeFriend;
   return (
     <form action="" className="form-split-bill" onSubmit={onSubmitHandler}>
       <h2>Split a bill with a {name}</h2>

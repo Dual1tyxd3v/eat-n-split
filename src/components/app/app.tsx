@@ -20,8 +20,14 @@ function App(): JSX.Element {
     setShowAddFriend(false);
   }
 
-  function onEditFriendBalance(friend: FriendType) {
-    setFriends(friends.map((fr) => (friend.id === fr.id ? friend : fr)));
+  function onEditFriendBalance(newBalance: number) {
+    setFriends(
+      friends.map((fr) =>
+        activeFriend?.id === fr.id
+          ? { ...fr, balance: fr.balance + newBalance }
+          : fr,
+      ),
+    );
   }
 
   function onClickHandler() {
@@ -38,15 +44,12 @@ function App(): JSX.Element {
           activeId={activeFriend?.id}
         />
         <AddFriend addFriend={onAddFriends} isOpen={showAddFriend} />
-        <button
-          className="button"
-          onClick={onClickHandler}
-        >
+        <button className="button" onClick={onClickHandler}>
           {showAddFriend ? 'Close' : 'Add friend'}
         </button>
       </div>
       <SplitBill
-        activeFriend={activeFriend}
+        name={activeFriend?.name}
         onEditFriendBalance={onEditFriendBalance}
       />
     </div>
