@@ -19,7 +19,6 @@ export default function FriendItem({
       <h3>{name}</h3>
       {balance < 0 && (
         <p className="red">
-          {' '}
           You owe {name} {Math.abs(balance)}$
         </p>
       )}

@@ -8,21 +8,25 @@ import { FriendType } from '../../types/types';
 function App(): JSX.Element {
   const [friends, setFriends] = useState(initialFriends);
   const [activeFriend, setActiveFriend] = useState<null | FriendType>(null);
+  const [showAddFriend, setShowAddFriend] = useState(false);
 
   function onAddFriends(friend: FriendType) {
     setFriends([...friends, friend]);
+    setShowAddFriend(!showAddFriend);
   }
 
   function onToggleActiveFriend(friend: FriendType) {
-    if (friend.id === activeFriend?.id) {
-      setActiveFriend(null);
-      return;
-    }
-    setActiveFriend(friend);
+    setActiveFriend((f) => (f?.id === friend.id ? null : friend));
+    setShowAddFriend(false);
   }
 
   function onEditFriendBalance(friend: FriendType) {
-    setFriends(friends.map((fr) => friend.id === fr.id ? friend : fr));
+    setFriends(friends.map((fr) => (friend.id === fr.id ? friend : fr)));
+  }
+
+  function onClickHandler() {
+    setShowAddFriend(!showAddFriend);
+    setActiveFriend(null);
   }
 
   return (
@@ -33,7 +37,13 @@ function App(): JSX.Element {
           toggleActiveFriend={onToggleActiveFriend}
           activeId={activeFriend?.id}
         />
-        <AddFriend addFriend={onAddFriends} />
+        <AddFriend addFriend={onAddFriends} isOpen={showAddFriend} />
+        <button
+          className="button"
+          onClick={onClickHandler}
+        >
+          {showAddFriend ? 'Close' : 'Add friend'}
+        </button>
       </div>
       <SplitBill
         activeFriend={activeFriend}
