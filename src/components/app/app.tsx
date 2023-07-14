@@ -21,13 +21,23 @@ function App(): JSX.Element {
     setActiveFriend(friend);
   }
 
+  function onEditFriendBalance(friend: FriendType) {
+    setFriends(friends.map((fr) => friend.id === fr.id ? friend : fr));
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendList friends={friends} toggleActiveFriend={onToggleActiveFriend}/>
+        <FriendList
+          friends={friends}
+          toggleActiveFriend={onToggleActiveFriend}
+        />
         <AddFriend addFriend={onAddFriends} />
       </div>
-      <SplitBill activeFriend={activeFriend} />
+      <SplitBill
+        activeFriend={activeFriend}
+        onEditFriendBalance={onEditFriendBalance}
+      />
     </div>
   );
 }
