@@ -1,5 +1,4 @@
 import { FriendType } from '../../types/types';
-import Button from '../button/button';
 
 export default function FriendItem({ friend }: { friend: FriendType }) {
   const { name, image, balance } = friend;
@@ -10,7 +9,7 @@ export default function FriendItem({ friend }: { friend: FriendType }) {
       {balance < 0 && <p className="red"> You owe {name} {Math.abs(balance)}$</p>}
       {balance > 0 && <p className="green">{name} owes you {balance}$</p>}
       {balance === 0 && <p>You and {name} are even</p>}
-      <Button>Select</Button>
+      <button className="button" >Select</button>
     </li>
   );
 }

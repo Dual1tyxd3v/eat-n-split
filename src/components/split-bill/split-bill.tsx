@@ -1,5 +1,3 @@
-import Button from '../button/button';
-
 export default function SplitBill() {
   return (
     <form action="" className="form-split-bill">
@@ -15,7 +13,7 @@ export default function SplitBill() {
         <option value="user">You</option>
         <option value="friend">#friend</option>
       </select>
-      <Button>Split bill</Button>
+      <button className="button" >Split bill</button>
     </form>
   );
 }
