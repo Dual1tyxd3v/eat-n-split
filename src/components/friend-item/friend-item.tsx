@@ -1,6 +1,11 @@
 import { FriendType } from '../../types/types';
 
-export default function FriendItem({ friend }: { friend: FriendType }) {
+type FriendItemProps = {
+  toggleActiveFriend: (friend: FriendType) => void;
+  friend: FriendType;
+}
+
+export default function FriendItem({ friend, toggleActiveFriend }: FriendItemProps) {
   const { name, image, balance } = friend;
   return (
     <li>
@@ -9,7 +14,7 @@ export default function FriendItem({ friend }: { friend: FriendType }) {
       {balance < 0 && <p className="red"> You owe {name} {Math.abs(balance)}$</p>}
       {balance > 0 && <p className="green">{name} owes you {balance}$</p>}
       {balance === 0 && <p>You and {name} are even</p>}
-      <button className="button" >Select</button>
+      <button className="button" onClick={() => toggleActiveFriend(friend)} >Select</button>
     </li>
   );
 }

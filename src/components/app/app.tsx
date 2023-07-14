@@ -7,18 +7,27 @@ import { FriendType } from '../../types/types';
 
 function App(): JSX.Element {
   const [friends, setFriends] = useState(initialFriends);
+  const [activeFriend, setActiveFriend] = useState<null | FriendType>(null);
 
   function onAddFriends(friend: FriendType) {
     setFriends([...friends, friend]);
   }
 
+  function onToggleActiveFriend(friend: FriendType) {
+    if (friend.id === activeFriend?.id) {
+      setActiveFriend(null);
+      return;
+    }
+    setActiveFriend(friend);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendList friends={friends} />
+        <FriendList friends={friends} toggleActiveFriend={onToggleActiveFriend}/>
         <AddFriend addFriend={onAddFriends} />
       </div>
-      <SplitBill />
+      <SplitBill activeFriend={activeFriend} />
     </div>
   );
 }
